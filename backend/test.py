@@ -190,6 +190,8 @@ def make_task(category: str, title: str, location: str, desc: str):
 
 @app.patch("/task/{task_id}/status")
 def change_status(task_id: str, status: str):
-    if status != "open" || status != "cancelled" || status != "completed":
+    if status != "open" and status != "cancelled" and status != "completed":
         raise HTTPException(status_code = 400, detail = "status not found")
-    else 
+    else:
+        tasks[task_id]["status"] = status
+    return tasks[task_id]
